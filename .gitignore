@@ -15,6 +15,7 @@ doc/rdoc/*
 tmp/*
 pkg/*
 nbproject/*
+*.kpf
 .DS_Store
 daemon_test.log
 
