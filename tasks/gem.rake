@@ -1,4 +1,5 @@
 require 'rake/gempackagetask'
+require 'yaml'
 
 WIN_SUFFIX = ENV['WIN_SUFFIX'] || 'i386-mswin32'
 
@@ -19,13 +20,13 @@ spec = Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.8.5'
   
-  s.add_dependency        'rack',         '>= 0.3.0'
-  s.add_dependency        'eventmachine', '>= 0.12.0'
+  s.add_dependency        'rack',         '>= 0.9.1'
+  s.add_dependency        'eventmachine', '>= 0.12.4'
   unless WIN
     s.add_dependency      'daemons',      '>= 1.0.9'
   end
 
-  s.files                 = %w(COPYING CHANGELOG COMMITTERS README Rakefile) +
+  s.files                 = %w(COPYING CHANGELOG README Rakefile) +
                             Dir.glob("{benchmark,bin,doc,example,lib,spec,tasks}/**/*") + 
                             Dir.glob("ext/**/*.{h,c,rb,rl}")
   
@@ -58,6 +59,11 @@ end
 task :gem => :tag_warn
 
 namespace :gem do
+  desc "Update the gemspec for GitHub's gem server"
+  task :github do
+    File.open("thin.gemspec", 'w') { |f| f << YAML.dump(spec) }
+  end
+  
   desc 'Upload gem to code.macournoyer.com'
   task :upload => :gem do
     upload "pkg/#{spec.full_name}.gem", 'gems'

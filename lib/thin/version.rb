@@ -5,21 +5,21 @@ module Thin
   
   module VERSION #:nodoc:
     MAJOR    = 1
-    MINOR    = 0
-    TINY     = 1
+    MINOR    = 2
+    TINY     = 0
     
     STRING   = [MAJOR, MINOR, TINY].join('.')
     
-    CODENAME = "?".freeze
+    CODENAME = "Asynctilicious Supreme".freeze
     
-    RACK     = [0, 3].freeze # Latest Rack version that was tested
+    RACK     = [0, 1].freeze # Rack protocol version that was tested
   end
   
   NAME    = 'thin'.freeze
   SERVER  = "#{NAME} #{VERSION::STRING} codename #{VERSION::CODENAME}".freeze  
   
   def self.win?
-    RUBY_PLATFORM =~ /mswin/
+    RUBY_PLATFORM =~ /mswin|mingw/
   end
   
   def self.linux?

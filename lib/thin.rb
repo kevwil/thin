@@ -4,6 +4,7 @@ require 'fileutils'
 require 'timeout'
 require 'stringio'
 require 'time'
+require 'forwardable'
 
 require 'rubygems'
 require 'eventmachine'
@@ -41,9 +42,6 @@ require 'rack'
 require 'rack/adapter/loader'
 
 module Rack
-  module Handler
-    autoload :Thin, 'rack/handler/thin'
-  end
   module Adapter
     autoload :Rails, 'rack/adapter/rails'
   end

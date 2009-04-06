@@ -1,4 +1,18 @@
-== 1.0.1 ? release
+== 1.2.0 Asynctilicious Supreme release 
+ * Add support for Windows mingw Ruby distro [Juan C. Rodriguez]
+ * Add async response support, see example/async_*.ru [raggi]
+
+== 1.1.1 Super Disco Power Plus release 
+ * Fix bug when running with only options [hasimo]
+
+== 1.1.0 Super Disco Power release
+ * Require EventMachine 0.12.4
+ * Remove Thin handler, now part of Rack 0.9.1
+ * Fix Rack protocol version to 0.1 in environment hash.
+ * Fix error when passing no_epoll option to a cluster.
+ * Omit parsing #defined strings [Jérémy Zurcher]
+ * Defaults SERVER_NAME to localhost like webrick does [#87 state:resolved]
+ * Namespace parser to prevent error when mongrel is required [cliffmoon]
  * Set RACK_ENV based on environment option when loading rackup file [Curtis Summers] [#83 state:resolved]
  * Fixes a warning RE relative_url_root when using a prefix with Rails 2.1.1 [seriph] [#85 state:resolved]
  * --only can work as a sequence number (if < 80) or a port number (if >= 80) [jmay] [#81 state:resolved]
