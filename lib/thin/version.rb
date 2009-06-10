@@ -6,13 +6,13 @@ module Thin
   module VERSION #:nodoc:
     MAJOR    = 1
     MINOR    = 2
-    TINY     = 0
+    TINY     = 2
     
     STRING   = [MAJOR, MINOR, TINY].join('.')
     
-    CODENAME = "Asynctilicious Supreme".freeze
+    CODENAME = "I Find Your Lack of Sauce Disturbing".freeze
     
-    RACK     = [0, 1].freeze # Rack protocol version that was tested
+    RACK     = [1, 0].freeze # Rack protocol version
   end
   
   NAME    = 'thin'.freeze

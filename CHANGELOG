@@ -1,3 +1,16 @@
+== 1.2.2 I Find Your Lack of Sauce Disturbing release
+ * Fix force kill under 1.9 [Alexey Chebotar]
+ * Fix regression when --only option is used w/ --socket.
+ * Add process name 'tag' functionality. Easier to distinguish thin daemons 
+   from eachother in process listing [ctcherry]
+
+== 1.2.1 Asynctilicious Ultra Supreme release
+ * Require Rack 1.0.0
+ * Require EventMachine 0.12.6
+ * Use Rails Rack based dispatcher when available
+ * Allow String for response body
+ * Require openssl before eventmachine to prevent crash in 1.9
+
 == 1.2.0 Asynctilicious Supreme release 
  * Add support for Windows mingw Ruby distro [Juan C. Rodriguez]
  * Add async response support, see example/async_*.ru [raggi]
