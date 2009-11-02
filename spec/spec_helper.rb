@@ -1,10 +1,9 @@
 require 'rubygems'
-require File.dirname(__FILE__) + '/../lib/thin'
+require 'thin'
 require 'spec'
 require 'benchmark'
 require 'timeout'
 require 'fileutils'
-require 'benchmark_unit'
 require 'net/http'
 require 'socket'
 
@@ -23,6 +22,7 @@ end
 module Matchers
   class BeFasterThen
     def initialize(max_time)
+      require 'benchmark_unit'
       @max_time = max_time
     end
 

@@ -1,12 +1,9 @@
-$:.unshift File.expand_path(File.dirname(__FILE__))
-
 require 'fileutils'
 require 'timeout'
 require 'stringio'
 require 'time'
 require 'forwardable'
 
-require 'rubygems'
 require 'openssl'
 require 'eventmachine'
 

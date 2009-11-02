@@ -22,13 +22,17 @@ module Rack
         
         load_application
         
-        @rails_app = if ActionController.const_defined?(:Dispatcher) && ActionController::Dispatcher.instance_methods.include?(:call)
+        @rails_app = if rack_based?
           ActionController::Dispatcher.new
         else
           CgiApp.new
         end
         
         @file_app = Rack::File.new(::File.join(RAILS_ROOT, "public"))
+      end
+      
+      def rack_based?
+        Rails::VERSION::MAJOR >= 2 && Rails::VERSION::MINOR >= 2 && Rails::VERSION::TINY >= 3
       end
       
       def load_application
