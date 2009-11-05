@@ -41,7 +41,8 @@ module Thin
         :pid                  => 'tmp/pids/thin.pid',
         :max_conns            => Server::DEFAULT_MAXIMUM_CONNECTIONS,
         :max_persistent_conns => Server::DEFAULT_MAXIMUM_PERSISTENT_CONNECTIONS,
-        :require              => []
+        :require              => [],
+        :wait                 => Controllers::Cluster::DEFAULT_WAIT_TIME
       }
       
       parse!
@@ -96,6 +97,8 @@ module Thin
           opts.on("-o", "--only NUM", "Send command to only one server of the cluster") { |only| @options[:only] = only.to_i }
           opts.on("-C", "--config FILE", "Load options from config file")               { |file| @options[:config] = file }
           opts.on(      "--all [DIR]", "Send command to each config files in DIR")      { |dir| @options[:all] = dir } if Thin.linux?
+          opts.on("-O", "--onebyone", "Restart the cluster one by one (only works with restart command)") { @options[:onebyone] = true }
+          opts.on("-w", "--wait NUM", "Maximum wait time for server to be started in seconds (use with -O)") { |time| @options[:wait] = time.to_i }
         end
         
         opts.separator ""
