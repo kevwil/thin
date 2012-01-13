@@ -1,5 +1,6 @@
 CLEAN.include %w(coverage tmp log)
 
+gem "rspec", "~> 1.2.9"
 require 'spec/rake/spectask'
 
 PERF_SPECS = FileList['spec/perf/*_spec.rb']
@@ -18,7 +19,6 @@ SPECS      = FileList['spec/**/*_spec.rb'] - PERF_SPECS - SPECS2
 
 def spec_task(name, specs)
   Spec::Rake::SpecTask.new(name) do |t|
-    t.libs << 'lib'
     t.spec_opts = %w(-fs -c)
     t.spec_files = specs
   end

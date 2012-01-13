@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 
 class TestLogging
   include Logging
@@ -38,6 +38,12 @@ describe Logging do
   it "should be usable as module functions" do
     Logging.silent = true
     Logging.log "hi"
+  end
+
+  it "should print errors to STDERR" do
+    error = mock(:error, :backtrace => Array("PC LOAD LETTER"))
+    STDERR.should_receive(:print).with(/PC LOAD LETTER/)
+    @object.log_error(error)
   end
   
   after do

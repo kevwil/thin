@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'thin'
+gem "rspec", "~> 1.2.9"
 require 'spec'
 require 'benchmark'
 require 'timeout'
@@ -134,6 +135,13 @@ module Helpers
     stream.reopen(old_stream)
   end
   
+  def silence_warnings
+    old_verbose, $VERBOSE = $VERBOSE, nil
+    yield
+  ensure
+    $VERBOSE = old_verbose
+  end
+  
   # Create and parse a request
   def R(raw, convert_line_feed=false)
     raw.gsub!("\n", "\r\n") if convert_line_feed
@@ -153,13 +161,19 @@ module Helpers
       wait_for_socket(address, port)
     else
       # If we can't ping the address fallback to just wait for the server to run
-      sleep 1 until @server.running?
+      sleep 0.01 until @server.running?
     end
   end
   
   def stop_server
     @server.stop!
     @thread.kill
+    
+    100.times do
+      break unless EM.reactor_running?
+      sleep 0.01
+    end
+
     raise "Reactor still running, wtf?" if EventMachine.reactor_running?
   end
   

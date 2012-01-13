@@ -1,9 +1,10 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require 'spec_helper'
 
 describe Connection do
   before do
     @connection = Connection.new(mock('EM', :null_object => true))
     @connection.post_init
+    @connection.backend = mock("backend", :ssl? => false)
     @connection.app = proc do |env|
       [200, {}, ['']]
     end
